@@ -1,0 +1,24 @@
+.board{
+  width: 350px;
+  height:350px;
+  align: center;
+}
+
+#timer {
+  color: black;
+  font-size: 12px;
+  display: block;
+  margin: 30px;
+}
+
+li {
+  height:60px;
+  width: 60px;
+  display: inline-block;
+  margin: -2px;
+  border-style: solid;
+  border-color: black;
+  border-width: 3px;
+  text-align: center;
+  line-height: 60px;
+}
