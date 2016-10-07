@@ -5,9 +5,12 @@ $(function() {
   var $input_board = $(".input_board");
   var $form_event = $(".form_event");
   var $submit_button = $("#submit_button");
+  var $load_button = $("#load_button");
+  var $reset_button = $("#reset_button");
   var $tiles = $("li");
   var $grid_arr = [];
   var $rand_arr = [];
+  var sol_arr = [];
   var $count = 0;
   var $counter = setInterval(timer, 1000);
 
@@ -99,6 +102,36 @@ $(function() {
     if ($count===0) {
     }
   });
+
+$load_button.one("click", function() {
+  var newInput_obj = document.getElementsByClassName("newInput");
+  for (i=0; i<newInput_obj.length; i++) {
+    console.log(i, newInput_obj[i].value);
+    sol_arr.push(parseFloat(newInput_obj[i].value));
+  }
+  scoreCheck();
+});
+
+function scoreCheck (){
+  var newInput_obj = document.getElementsByClassName("newInput");
+  for (i=0; i<newInput_obj.length; i++) {
+    if(sol_arr[i] === $rand_arr[i]) {
+      newInput_obj[i].className += ' correct';
+    } else {
+      newInput_obj[i].className += ' incorrect';
+    }
+  }
+}
+
+$reset_button.click(function() {
+  $number_board.html(" ");
+  $input_board.html(" ");
+  $("input").html(" ");
+  $("li").html(" ");
+});
+
+
+
 });
 
 
