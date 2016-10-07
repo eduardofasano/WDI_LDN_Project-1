@@ -1,7 +1,30 @@
-.board{
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color:white;
+}
+
+.container {
+  position: relative;
+}
+
+
+.number_board{
   width: 350px;
   height:350px;
   align: center;
+  position: absolute;
+  z-index: 1;
+}
+
+.input_board{
+  width: 350px;
+  height:350px;
+  align: center;
+  /*display: none;*/
+  position: absolute;
 }
 
 #timer {
@@ -9,9 +32,23 @@
   font-size: 12px;
   display: block;
   margin: 30px;
+  margin: black;
 }
 
 li {
+  height:60px;
+  width: 60px;
+  display: inline-block;
+  margin: -2px;
+  border-style: solid;
+  border-color: black;
+  border-width: 3px;
+  text-align: center;
+  line-height: 60px;
+  background-color: white;
+}
+
+  .newInput {
   height:60px;
   width: 60px;
   display: inline-block;
