@@ -30,7 +30,7 @@ $(function() {
       $count = 120;
     }
 
-  $submit_button.one("click", function() {
+  $submit_button.click(function() {
     var $level = $(".level").val();
     var $tile_num = 0;
 
@@ -38,7 +38,7 @@ $(function() {
       case $level === "level1":
         $tile_num = 4;
         $grid_arr = [1,2,3,4];
-        $count=3;
+        $count=4;
         $number_board.width("150px");
         $number_board.height("150px");
         $input_board.width("150px");
@@ -48,7 +48,7 @@ $(function() {
       case $level === "level2":
         $tile_num = 9;
         $grid_arr = [1,2,3,4,5,6,7,8,9];
-        $count=3;
+        $count=31;
         $number_board.width("220px");
         $number_board.height("220px");
         $input_board.width("220px");
@@ -57,7 +57,7 @@ $(function() {
       break;
       case $level === "level3":
         $tile_num = 16;
-        $count=3;
+        $count=61;
         $grid_arr = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
         $number_board.width("250px");
         $number_board.height("250px");
@@ -67,7 +67,7 @@ $(function() {
       break;
       case $level === "level4":
         $tile_num = 25;
-        $count=3;
+        $count=121;
         $grid_arr = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25];
         $number_board.width("330px");
         $number_board.height("330px");
@@ -101,9 +101,10 @@ $(function() {
     }
     if ($count===0) {
     }
+    $submit_button.prop( "disabled", true );
   });
 
-$load_button.one("click", function() {
+$load_button.click(function() {
   var newInput_obj = document.getElementsByClassName("newInput");
   for (i=0; i<newInput_obj.length; i++) {
     console.log(i, newInput_obj[i].value);
@@ -124,8 +125,18 @@ function scoreCheck (){
 }
 
 $reset_button.click(function() {
-  $number_board.html(" ");
-  $input_board.html(" ");
+  $grid_arr = [];
+  $rand_arr = [];
+  sol_arr = [];
+  $count= 0;
+  $level = "";
+  $submit_button.prop( "disabled", false );
+  $number_board.fadeIn(2000);
+  $number_board.html("");
+  $input_board.html("");
+  //$input_board.html(" ");
+  $number_board.css("z-index", "2");
+  $input_board.css("z-index", "1");
   $("input").html(" ");
   $("li").html(" ");
 });
@@ -133,49 +144,3 @@ $reset_button.click(function() {
 
 
 });
-
-
-// console.log($level);
-//
-// switch(true) {
-//   case $level === "level1":
-//   $tile_num = 4;
-//   $board.style.width = "200px";
-//   $board.style.height = "200px";
-//   console.log($tile_num);
-//   break;
-//   case $level === "level2":
-//   $tile_num = 9;
-//   $board.style.width = "250px";
-//   $board.style.height = "250px";
-//   console.log($tile_num);
-//   break;
-//   case $level === "level3":
-//   $tile_num = 16;
-//   $board.style.width = "300px";
-//   $board.style.height = "300px";
-//   console.log($tile_num);
-//   break;
-//   case $level === "level4":
-//   $tile_num = 25;
-//   $board.style.width = "350px";
-//   $board.style.height = "350px";
-//   console.log($tile_num);
-//   break;
-// }
-
-// $form_event.submit(function(e) {
-//
-//   $tile.each(function(i, tile) {
-//     var $rand_num = Math.floor(Math.random()*($grid4_arr.length)); //get random number
-//     var $arr_val = $grid4_arr[$rand_num]; //extract array value using random number
-//     tile.innerHTML = $arr_val;
-//     $rand_arr.push(parseFloat(tile.innerHTML));
-//     var $rem_num = ($grid4_arr.indexOf($arr_val)); //assign array value to a variable
-//     $grid4_arr.splice($rem_num, 1); //take away array vaue from array
-//     e.preventDefault();
-//   });
-//   $count=10;
-//   console.log($rand_arr);
-// });
-// });
