@@ -32,12 +32,27 @@ $(function() {
 
   $submit_button.click(function() {
     var $level = $(".level").val();
+    var $language = $(".language").val();
     var $tile_num = 0;
 
     switch(true) {
       case $level === "level1":
         $tile_num = 4;
-        $grid_arr = [1,2,3,4];
+        switch (true) {
+          case $language === "numbers":
+          $grid_arr = [1,2,3,4];
+          break;
+          case $language === "letters":
+          $grid_arr = ["A","B","C","D"];
+          break;
+          case $language === "chinese":
+          $grid_arr = ["我","你","他","她"];
+          break;
+          // case $language === "emoji":
+          // $grid_arr = [];
+          // break;
+        }
+        //$grid_arr = [1,2,3,4];
         $count=4;
         $number_board.width("150px");
         $number_board.height("150px");
@@ -47,7 +62,20 @@ $(function() {
       break;
       case $level === "level2":
         $tile_num = 9;
-        $grid_arr = [1,2,3,4,5,6,7,8,9];
+        switch (true) {
+          case $language === "numbers":
+          $grid_arr = [1,2,3,4,5,6,7,8,9];
+          break;
+          case $language === "letters":
+          $grid_arr = ["A","B","C","D","E","F","G","H","I"];
+          break;
+          case $language === "chinese":
+          $grid_arr = ["我","你","他","她",];
+          break;
+          // case $language === "emoji":
+          // $grid_arr = [];
+          // break;
+        }
         $count=31;
         $number_board.width("220px");
         $number_board.height("220px");
@@ -58,7 +86,20 @@ $(function() {
       case $level === "level3":
         $tile_num = 16;
         $count=61;
-        $grid_arr = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
+        switch (true) {
+          case $language === "numbers":
+          $grid_arr = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
+          break;
+          case $language === "letters":
+          $grid_arr = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P"];
+          break;
+          case $language === "chinese":
+          $grid_arr = ["我","你","他","她",];
+          break;
+          // case $language === "emoji":
+          // $grid_arr = [];
+          // break;
+        }
         $number_board.width("250px");
         $number_board.height("250px");
         $input_board.width("250px");
@@ -68,8 +109,20 @@ $(function() {
       case $level === "level4":
         $tile_num = 25;
         $count=121;
-        $grid_arr = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25];
-        $number_board.width("330px");
+        switch (true) {
+          case $language === "numbers":
+          $grid_arr = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25];
+          break;
+          case $language === "letters":
+          $grid_arr = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y"];
+          break;
+          case $language === "chinese":
+          $grid_arr = ["我","你","他","她","饭","吃","茶","是","不","太","好",'马',"好","快","大","吧","了","写","了","男","女"];
+          break;
+          // case $language === "emoji":
+          // $grid_arr = [];
+          // break;
+        }        $number_board.width("330px");
         $number_board.height("330px");
         $input_board.width("330px");
         $input_board.height("330px");
@@ -130,6 +183,7 @@ $reset_button.click(function() {
   sol_arr = [];
   $count= 0;
   $level = "";
+  $language = "";
   $submit_button.prop( "disabled", false );
   $number_board.fadeIn(2000);
   $number_board.html("");
@@ -140,7 +194,5 @@ $reset_button.click(function() {
   $("input").html(" ");
   $("li").html(" ");
 });
-
-
 
 });
