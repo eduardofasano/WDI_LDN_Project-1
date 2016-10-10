@@ -48,11 +48,10 @@ $(function() {
           case $language === "chinese":
           $grid_arr = ["我","你","他","她"];
           break;
-          // case $language === "emoji":
-          // $grid_arr = [];
-          // break;
+          case $language === "emoji":
+          $grid_arr = ["😜","😂","🎾","😘"];
+          break;
         }
-        //$grid_arr = [1,2,3,4];
         $count=4;
         $number_board.width("150px");
         $number_board.height("150px");
@@ -70,11 +69,11 @@ $(function() {
           $grid_arr = ["A","B","C","D","E","F","G","H","I"];
           break;
           case $language === "chinese":
-          $grid_arr = ["我","你","他","她",];
+          $grid_arr = ["我","你","他","她","饭","吃","茶","是","不"];
           break;
-          // case $language === "emoji":
-          // $grid_arr = [];
-          // break;
+          case $language === "emoji":
+          $grid_arr = ["😜","😂","🎾","😘","😄","😆","🤓","😉","😡"];
+          break;
         }
         $count=31;
         $number_board.width("220px");
@@ -94,11 +93,11 @@ $(function() {
           $grid_arr = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P"];
           break;
           case $language === "chinese":
-          $grid_arr = ["我","你","他","她",];
+          $grid_arr = ["我","你","他","她","饭","吃","茶","是","不","太","好",'马',"雨","快","大","吧",];
           break;
-          // case $language === "emoji":
-          // $grid_arr = [];
-          // break;
+          case $language === "emoji":
+          $grid_arr = ["😜","😂","🎾","😘","😄","😆","🤓","😉","😡","💩","💀","👻","👽","🤖","🙉","🐨"];
+          break;
         }
         $number_board.width("250px");
         $number_board.height("250px");
@@ -117,12 +116,13 @@ $(function() {
           $grid_arr = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y"];
           break;
           case $language === "chinese":
-          $grid_arr = ["我","你","他","她","饭","吃","茶","是","不","太","好",'马',"好","快","大","吧","了","写","了","男","女"];
+          $grid_arr = ["我","你","他","她","饭","吃","茶","是","不","太","好",'马',"雨","快","大","吧","了","写","了","男","女","狗","猫","米","国"];
           break;
-          // case $language === "emoji":
-          // $grid_arr = [];
-          // break;
-        }        $number_board.width("330px");
+          case $language === "emoji":
+          $grid_arr = ["😜","😂","🎾","😘","😄","😆","🤓","😉","😡","💩","💀","👻","👽","🤖","🙉","🐨","🐲","🕊","🍜","🎷","🗿","🕶","🌊","🎱","🏄"];
+          break;
+        }
+        $number_board.width("330px");
         $number_board.height("330px");
         $input_board.width("330px");
         $input_board.height("330px");
@@ -147,7 +147,7 @@ $(function() {
       $new_tile.innerHTML = $arr_val;
       $new_input.type = "text";
 
-      $rand_arr.push(parseFloat($new_tile.innerHTML));
+      $rand_arr.push($new_tile.innerHTML); //omitted parse float
       var $rem_num = ($grid_arr.indexOf($arr_val)); //assign array value to a variable
       $grid_arr.splice($rem_num, 1); //take away array vaue from array
       //e.preventDefault();
@@ -161,7 +161,7 @@ $load_button.click(function() {
   var newInput_obj = document.getElementsByClassName("newInput");
   for (i=0; i<newInput_obj.length; i++) {
     console.log(i, newInput_obj[i].value);
-    sol_arr.push(parseFloat(newInput_obj[i].value));
+    sol_arr.push(newInput_obj[i].value); //omitted parse float
   }
   scoreCheck();
 });
@@ -175,6 +175,8 @@ function scoreCheck (){
       newInput_obj[i].className += ' incorrect';
     }
   }
+  console.log(sol_arr);
+  console.log($rand_arr);
 }
 
 $reset_button.click(function() {
@@ -194,5 +196,6 @@ $reset_button.click(function() {
   $("input").html(" ");
   $("li").html(" ");
 });
+
 
 });
