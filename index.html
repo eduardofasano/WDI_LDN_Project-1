@@ -3,13 +3,20 @@
   <head>
     <meta charset="utf-8">
     <!-- <link rel="stylesheet" href="css/reset.css" media="screen" title="no title"> -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
     <link rel="stylesheet" href="css/style.css" media="screen" title="no title">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
     <title>Dr. Kawashima</title>
   </head>
   <body>
+    <h1> Dr. Kawashima's Doppelgänger</h1>
     <main>
+    <div class="clearfix">
+      <a id="kawashima"><img src="http://i.imgur.com/dOHaqSo.gif" title="Dr. Kawashima" alt="Dr. Kawashima Photo"/></a>
+      <div><p id="instructions_text"> Hello! I am Dr. Kawashima. I am a renowed expert on memory. I am looking for subjects who can take part in my research. If you would like to help, pick a level and language...</p></div>
+    </div>
     <form class="form_event" action="index.html" method="post">
       <select class="level">
         <option value="level1">Level 1</option>
@@ -23,14 +30,16 @@
         <option value="chinese">Simplified Chinese</option>
         <option value="emoji">Emojis!</option>
       </select>
-      <input id="load_button" type="button" name="name" value="Load">
-      <input id="submit_button" type="button" name="name" value="Submit">
-      <input id="reset_button" type="button" name="name" value="Reset">
+      <div>
+        <input class="buttons" id="submit_button" type="button" name="name" value="Submit">
+        <input class="buttons" id="load_button" type="button" name="name" value="Load">
+        <input class="buttons" id="reset_button" type="button" name="name" value="Reset">
+      </div>
     </form>
-    <div>
-      <p id="timer"></p>
-    </div>
     <div class="container">
+      <div>
+        <p id="timer">Use your time wisely...</p>
+      </div>
       <div class="number_board">
         <!-- <li id="input1"></li>
         <li id="inputx"></li> -->

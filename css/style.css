@@ -3,41 +3,114 @@
 }
 
 main {
-  width: 800px;
+  width: 350px;
   margin: 50px auto;
 }
 
 body {
   background-color:white;
+  font-family: 'Roboto', sans-serif;
 }
+
+h1 {
+  text-align: center;
+  margin: 10px 0 10px 0 auto;
+}
+
+.form_event {
+  text-align: center;
+}
+
+.buttons {
+  background:none;
+  border:none;
+  font-size:1em;
+  color:blue;
+}
+
+#submit_button, #load_button, #reset_button {
+  width: 80px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: white;
+  margin: 10px 15px 0px 15px;
+  background-color: #B8B8B8;
+  border-color: 3px solid #989898;
+  box-shadow: 1px 1px 1px #909090;
+}
+
+.language, .level {
+  margin: 5px 15px;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+#kawashima {
+  float: left;
+  margin: 0 auto;
+}
+
+#instructions_text {
+  margin: 10px 0 5px 0;
+  width: 240px;
+  height: 100px;
+  float: right;
+  background-color: #FFFFCC;
+  border-radius: 15px;
+  box-shadow: 2px 2px 2px #888888;
+  padding: 10px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
 
 .container {
+  margin: 0px auto;
   position: relative;
+  text-align: center;
 }
-
 
 .number_board{
   width: 350px;
   height:350px;
   align: center;
+  vertical-align: middle;
   position: absolute;
   z-index: 1;
+  left: 0;
+  right: 0;
+  margin: 15px auto;
+  text-align: center;
 }
 
 .input_board{
   width: 350px;
   height:350px;
+  vertical-align: middle;
   align: center;
-  /*display: none;*/
   position: absolute;
+  left: 0;
+  right: 0;
+  margin: 15px auto;
+  text-align: center;
 }
 
 #timer {
+  margin: 20px 0;
+  display: inline-block;
   color: black;
-  font-size: 12px;
+  font-size: 14px;
   display: block;
-  margin: 30px;
-  margin: black;
+  border: 1px solid black;
+  padding: 8px;
+  text-align: center;
 }
 
 li {
@@ -51,6 +124,7 @@ li {
   text-align: center;
   line-height: 60px;
   background-color: white;
+  vertical-align: middle;
 }
 
   .newInput {
