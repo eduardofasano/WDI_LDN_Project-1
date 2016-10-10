@@ -15,9 +15,10 @@
     <main>
     <div class="clearfix">
       <a id="kawashima"><img src="http://i.imgur.com/dOHaqSo.gif" title="Dr. Kawashima" alt="Dr. Kawashima Photo"/></a>
-      <div><p id="instructions_text"> Hello! I am Dr. Kawashima. I am a renowed expert on memory. I am looking for subjects who can take part in my research. If you would like to help, pick a level and language...</p></div>
+      <div><p id="instructions_text"> Hello! I am Dr. Kawashima. I am a renowed expert on memory. I am looking for subjects for my research. If you would like to help, pick a level and language and press submit!</p></div>
     </div>
     <form class="form_event" action="index.html" method="post">
+    <div class="select_items">
       <select class="level">
         <option value="level1">Level 1</option>
         <option value="level2">Level 2</option>
@@ -30,11 +31,13 @@
         <option value="chinese">Simplified Chinese</option>
         <option value="emoji">Emojis!</option>
       </select>
-      <div>
-        <input class="buttons" id="submit_button" type="button" name="name" value="Submit">
-        <input class="buttons" id="load_button" type="button" name="name" value="Load">
-        <input class="buttons" id="reset_button" type="button" name="name" value="Reset">
-      </div>
+    </div>
+    <div id="input_buttons">
+      <input class="buttons" id="submit_button" type="button" name="name" value="Submit">
+      <input class="buttons" id="load_button" type="button" name="name" value="Load">
+      <input class="buttons" id="reset_button" type="button" name="name" value="Reset">
+      <input class="buttons" id="timer_button" type="button" name="name" value="End Timer">
+    </div>
     </form>
     <div class="container">
       <div>

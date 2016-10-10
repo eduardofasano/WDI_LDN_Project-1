@@ -7,32 +7,38 @@ $(function() {
   var $submit_button = $("#submit_button");
   var $load_button = $("#load_button");
   var $reset_button = $("#reset_button");
+  var $timer_button = $("#timer_button").on();
+  var $timer = $("#timer");
   var $tiles = $("li");
   var $grid_arr = [];
   var $rand_arr = [];
   var sol_arr = [];
   var $cor_arr = [];
   var $iq_val = 1;
-  var $count = -1;
+  var $count = "";
   var $counter = setInterval(timer, 1000);
   var $scenario = 0;
   var $instructions = $("#instructions_text");
 
-  function timer(){
-    $("#timer").html("Use your time wisely...");
-    if($count > 0) {
-      $count--;
-      if ($count===0){
-        clearInterval();
-        $number_board.fadeOut(2000);
-        $instructions.html("Very well, please fill in as many of the squares as you can remember... Take all the time you need - but I suggest you move quickly. To submit your answers select Load.");
-      }
-      $("#timer").html("Timer: "+$count + " seconds");
-    }
-  }
 
   function resetTimer(){
-    $count = 120;
+    clearInterval($counter);
+    $number_board.fadeOut(1000);
+    $instructions.html("Very well, please fill in as many of the squares as you can remember... Take all the time you need - but I suggest you move quickly. To submit your answers click Load.");
+  }
+
+  $timer_button.click(function(){
+    resetTimer();
+  });
+
+  function timer(){
+    if($count > 0) {
+      $count--;
+      if ($count===0) {
+        resetTimer();
+      }
+      $timer.html("Timer: "+$count + " seconds");
+    }
   }
 
   $submit_button.click(function() {
@@ -40,7 +46,7 @@ $(function() {
     var $language = $(".language").val();
     var $tile_num = 0;
 
-    $instructions.html("Focus... Time is precious. Try to remeber as much of the grid below, before the timer reaches zero. Now is the time to focus! If you wish to start again, then press reset");
+    $instructions.html("Focus... Time is precious. Try to remeber as much of the grid below, before the timer reaches zero. Now is the time to focus! If you wish to start over, then press reset");
     switch(true) {
       case $level === "level1":
       $scenario = 1;
@@ -61,9 +67,9 @@ $(function() {
       }
       $count=4;
       $number_board.width("150px");
-      $number_board.height("150px");
+      // $number_board.height("150px");
       $input_board.width("150px");
-      $input_board.height("150px");
+      // $input_board.height("150px");
       console.log($tile_num);
       break;
       case $level === "level2":
@@ -85,9 +91,9 @@ $(function() {
       }
       $count=31;
       $number_board.width("220px");
-      $number_board.height("220px");
+      // $number_board.height("220px");
       $input_board.width("220px");
-      $input_board.height("220px");
+      // $input_board.height("220px");
       console.log($tile_num);
       break;
       case $level === "level3":
@@ -109,9 +115,9 @@ $(function() {
         break;
       }
       $number_board.width("250px");
-      $number_board.height("250px");
+      // $number_board.height("250px");
       $input_board.width("250px");
-      $input_board.height("250px");
+      // $input_board.height("250px");
       console.log($tile_num);
       break;
       case $level === "level4":
@@ -133,9 +139,9 @@ $(function() {
         break;
       }
       $number_board.width("330px");
-      $number_board.height("330px");
+      // $number_board.height("330px");
       $input_board.width("330px");
-      $input_board.height("330px");
+      // $input_board.height("330px");
       console.log($tile_num);
       break;
     }
@@ -200,7 +206,7 @@ $(function() {
           $instructions.html("Very impressive, a perfect score, you are obviously ready for the next level!");
           break;
           case $iq_val >= (0.75):
-          $instructions.html("Well done indeed. Even though you missed a tile, I suggest you move onto the next level!");
+          $instructions.html("Well done indeed. Even though you missed a tile, I suggest you press reset and move onto the next level!");
           break;
           case $iq_val < (0.75):
           $instructions.html("There is little to be proud of in your score. Are you trying to ruin my experiment!?!? Focus harder! Repeat the same level!");
@@ -212,7 +218,7 @@ $(function() {
         $instructions.html("Very impressive, a perfect score, you are obviously ready for the next level!");
         break;
         case $iq_val >= (0.75):
-        $instructions.html("Well done indeed. You scored "+($iq_val*100)+"%, I suggest you move onto the next level!");
+        $instructions.html("Well done indeed. You scored "+($iq_val*100)+"%, I suggest you press reset and move onto the next level!");
         break;
         case $iq_val >= (0.60):
         $instructions.html("You scored "+($iq_val*100)+"%, perhaps you should repeat this level before moving forward... Focus!");
@@ -227,7 +233,7 @@ $(function() {
         $instructions.html("Very impressive, a perfect score, you are obviously ready for the next level!");
         break;
         case $iq_val >= (0.75):
-        $instructions.html("Well done indeed. You scored "+($iq_val*100)+"%, I suggest you move onto the next level!");
+        $instructions.html("Well done indeed. You scored "+($iq_val*100)+"%, I suggest you press reset and move onto the next level!");
         break;
         case $iq_val >= (0.60):
         $instructions.html("You scored "+($iq_val*100)+"%, perhaps you should repeat this level before moving forward... Focus!");
@@ -261,6 +267,7 @@ $(function() {
     sol_arr = [];
     $cor_arr = [];
     $count= 0;
+    $timer.html("Use your time wisely...");
     var $level = $(".level").val();
     var $language = $(".language").val();
     $submit_button.prop( "disabled", false );
@@ -272,6 +279,6 @@ $(function() {
     $input_board.css("z-index", "1");
     $("input").html(" ");
     $("li").html(" ");
-    $instructions.html("Hello! I am Dr. Kawashima. I am a renowed expert on memory. I am looking for subjects who can take part in my research. If you would like to help, pick a level and language...");
+    $instructions.html("Hello! I am Dr. Kawashima. I am a renowed expert on memory. I am looking for subjects for my research. If you would like to help, pick a level and language and press submit!");
   });
 });
