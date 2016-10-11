@@ -5,6 +5,7 @@ $(function() {
   var $inputBoard = $(".input_board"); //input board which appears at end of timer and replaces game board grid
   //var $form_event = $(".form_event");  REMOVE??
   var $submitButton = $("#submit_button"); //submit button which drives the grid functionality
+  var submitClick = false;
   var $loadButton = $("#load_button"); //allows user to upload answers to missing grid elements
   var $resetButton = $("#reset_button"); //allows users to reset game board and levels to start over
   var $timerButton = $("#timer_button"); //allows users to manually end the timer and input grid elements
@@ -20,6 +21,12 @@ $(function() {
   var scenario = 0; // alternative variable to store 'level' used in finalPrompt() switch
   var $instructions = $("#instructions_text"); // HTML selector to display text in instructions div
   $('.selectpicker').selectize(); //initialising selectize JS
+  var newTile;
+  var newInput;
+  var arrVal;
+
+  $loadButton.prop( "disabled", true );
+  $timerButton.prop( "disabled", true );
 
   //TIMER FUNCTIONALITY
   //Timer function
@@ -150,41 +157,44 @@ $(function() {
 
     //For loop which creates and appends tiles for board depending on tile_num figure set by user above
     for (i=0; i<$tile_num; i++) {
-      var $rand_num = Math.floor(Math.random()*(gridArr.length)); //get random number
-      var $arr_val = gridArr[$rand_num]; //extract array value using random number
+      var randNum = Math.floor(Math.random()*(gridArr.length)); //get random number
+      arrVal = gridArr[randNum]; //extract array value using random number
 
-      var $new_tile = document.createElement('li'); //create <li> for i<$tile_num for number board
-      var $new_input = document.createElement('input');//cre <input> for i<$tile_num for input board
+      newTile = document.createElement('li'); //create <li> for i<$tile_num for number board
+      newInput = document.createElement('input');//cre <input> for i<$tile_num for input board
 
-      $numberBoard.append($new_tile); //append $new_tile to $numberBoard
-      $inputBoard.append($new_input); //append $new_input to $inputBoard
+      $numberBoard.append(newTile); //append newTile to $numberBoard
+      $inputBoard.append(newInput); //append newInput to $inputBoard
 
-      $new_tile.id = i;
-      $new_input.className += ' newInput';
-      $new_input.id = i;
+      newTile.id = i;
+      newInput.className += ' newInput';
+      newInput.id = i;
 
-      $new_tile.innerHTML = $arr_val;
-      $new_input.type = "text";
+      newTile.innerHTML = arrVal;
+      newInput.type = "text";
 
-      randArr.push($new_tile.innerHTML);
-      var $rem_num = (gridArr.indexOf($arr_val)); //assign array value to a variable
+      randArr.push(newTile.innerHTML);
+      var $rem_num = (gridArr.indexOf(arrVal)); //assign array value to a variable
       gridArr.splice($rem_num, 1); //take away array vaue from array
-      //e.preventDefault();
     }
     startTimer();
     $submitButton.prop( "disabled", true );
+    $loadButton.prop( "disabled", false );
+    $timerButton.prop( "disabled", false );
+
   });
 
   //Load button gets user inputted numbers and figures, runs score function as well as final prompt function
-  $loadButton.click(function() {
+  $loadButton.click( function() {
     var newInputObj = document.getElementsByClassName("newInput");
     for (i=0; i<newInputObj.length; i++) {
-      console.log(i, newInputObj[i].value);
-      solArr.push(newInputObj[i].value); //omitted parse float
+      solArr.push(newInputObj[i].value);
     }
     scoreCheck();
     finalPrompt();
   });
+
+
 
   //scoreCheck function compares the arrays and adds '1' to the 'cor_arr' if the answers are a match
   function scoreCheck (){
@@ -221,7 +231,6 @@ $(function() {
         message = "You scored "+((iqVal*100).toFixed(2))+"%!  Are you trying to ruin my experiment!?!? Focus harder! Repeat the same level!";
         if(scenario === 4) message = "You scored "+((iqVal*100).toFixed(2))+"%!  You were obviously not ready for this challenge...";
       }
-      console.log(message);
       $instructions.html(message);
     }
 
