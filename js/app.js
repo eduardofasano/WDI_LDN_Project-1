@@ -19,6 +19,7 @@ $(function() {
   var $counter; // variable which stores setInterval functionalilty for timer
   var $scenario = 0; // alternative variable to store 'level' used in finalPrompt() switch
   var $instructions = $("#instructions_text"); // HTML selector to display text in instructions div
+  $('.selectpicker').selectize(); //initialising selectize JS
 
   //TIMER FUNCTIONALITY
   //Timer function
