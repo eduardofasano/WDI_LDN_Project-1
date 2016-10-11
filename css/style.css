@@ -25,6 +25,7 @@ h1 {
   width: 400px;
 }
 
+/*remove deault button styling*/
 .buttons {
   background:none;
   border:none;
@@ -32,8 +33,7 @@ h1 {
   color:black;
 }
 
-
-
+/*add specific button formatting*/
 #submit_button, #load_button, #reset_button, #timer_button {
   width: 80px;
   border-radius: 5px;
@@ -49,6 +49,10 @@ h1 {
   background-color: #708090;
 }
 
+.selectpicker {
+  style: btn-info;
+  size: 4;
+}
 
 .select_items {
   width: 400px;
@@ -65,6 +69,7 @@ h1 {
     clear: both;
     margin-bottom: 25px;
 }
+
 #kawashima {
   float: left;
   margin: 0 auto;
@@ -84,7 +89,6 @@ h1 {
   font-weight: 800;
 }
 
-
 .container {
   width: 400px;
   height: 400px;
@@ -94,8 +98,6 @@ h1 {
 }
 
 .number_board{
-  /*width: 350px;
-  height:350px;*/
   align: center;
   vertical-align: middle;
   position: absolute;
@@ -107,9 +109,7 @@ h1 {
   text-align: center;
 }
 
-.input_board{
-  /*width: 350px;
-  height:350px;*/
+.input_board{ s
   vertical-align: middle;
   align: center;
   position: absolute;

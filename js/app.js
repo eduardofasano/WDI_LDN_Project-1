@@ -1,28 +1,28 @@
 $(function() {
   console.log('loaded');
 
-  var $number_board = $(".number_board");
-  var $input_board = $(".input_board");
-  var $form_event = $(".form_event");
-  var $submit_button = $("#submit_button");
-  var $load_button = $("#load_button");
-  var $reset_button = $("#reset_button");
-  var $timer_button = $("#timer_button");
-  var $timer = $("#timer");
-  var $tiles = $("li");
-  var $grid_arr = [];
-  var $rand_arr = [];
-  var sol_arr = [];
-  var $cor_arr = [];
-  var $iq_val = 1;
-  var $count;
-  var $counter;
-  console.log($counter);
-  var $scenario = 0;
-  var $instructions = $("#instructions_text");
+  var $number_board = $(".number_board"); //number board a.k.a grid
+  var $input_board = $(".input_board"); //input board which appears at end of timer and replaces game board grid
+  //var $form_event = $(".form_event");  REMOVE??
+  var $submit_button = $("#submit_button"); //submit button which drives the grid functionality
+  var $load_button = $("#load_button"); //allows user to upload answers to missing grid elements
+  var $reset_button = $("#reset_button"); //allows users to reset game board and levels to start over
+  var $timer_button = $("#timer_button"); //allows users to manually end the timer and input grid elements
+  var $timer = $("#timer"); //timer HTML selector
+  var $tiles = $("li"); //number board is made up of individual <li> elements
+  var $grid_arr = []; //primary array used to populate number board based on language & level when submit clicked
+  var $rand_arr = []; //stores randomised depicted components of grid array into seperate array
+  var sol_arr = []; // stores user inputs into grid
+  var $cor_arr = []; // stores '1' each time user matches grid_arr[i] to sol_arr[i]
+  var $iq_val = 1; // (cor_arr.length)/(rand_arr.length); % correct
+  var $count; // variable for time user has to complete each level
+  var $counter; // variable which stores setInterval functionalilty for timer
+  var $scenario = 0; // alternative variable to store 'level' used in finalPrompt() switch
+  var $instructions = $("#instructions_text"); // HTML selector to display text in instructions div
 
+  //TIMER FUNCTIONALITY
+  //Timer function
   function timer(){
-    console.log('timer: $count:', $count);
     if($count > 0) {
       $count--;
       if ($count===0) {
@@ -32,10 +32,12 @@ $(function() {
     }
   }
 
+  //Sets setInterval when called in submit button click event
   function startTimer() {
     $counter = setInterval(timer, 1000);
   }
 
+  //Reset timer function called when timer reaches 0 or when user manually end timer
   function resetTimer(){
     console.log("reset timer function automatically");
     clearInterval($counter);
@@ -44,60 +46,59 @@ $(function() {
     $instructions.html("Very well, please fill in as many of the squares as you can remember... Take all the time you need - but I suggest you move quickly. To submit your answers click Load.");
   }
 
-  $timer_button.click(
-    resetTimer
-  );
+  //Manual function which allows user to call resetTimer function
+  $timer_button.click(resetTimer);
 
+  //Submit button click event which defines level & language switches as well as the number board size
   $submit_button.click(function() {
     var $level = $(".level").val();
     var $language = $(".language").val();
     var $tile_num = 0;
     $instructions.html("Focus... Time is precious. Try to remeber as much of the grid below, before the timer reaches zero. Now is the time to focus! If you wish to start over, then press reset");
 
-    //Switch statement which sets tile_numbers to be created and what language to be used depending on what language and level the user selects
+    //Switch statement within switch statement to determine tile num, count, language and level
     switch($level) {
       case "level1":
       $scenario = 1;
-      $tile_num = 4;
-      switch (true) {
-        case $language === "numbers":
+      $tile_num = 4; //set level one tile count (2x2 grid)
+      switch ($language) { //Switch to pick level2 language
+        case "numbers":
         $grid_arr = [1,2,3,4];
         break;
-        case $language === "letters":
+        case "letters":
         $grid_arr = ["A","B","C","D"];
         break;
-        case $language === "chinese":
+        case "chinese":
         $grid_arr = ["我","你","他","她"];
         break;
-        case $language === "emoji":
+        case "emoji":
         $grid_arr = ["😜","😂","🎾","😘"];
         break;
       }
-      $count=4;
-      $number_board.width("150px");
-      $input_board.width("150px");
-      console.log($tile_num);
+      $count=4; //Set level1 timer count
+      $number_board.width("150px"); //Set level1 grid styling - number board
+      $input_board.width("150px"); //Set level1 grid styling - input board
       break;
       case "level2":
       $scenario = 2;
       $tile_num = 9;
-      switch (true) {
-        case $language === "numbers":
+      switch ($language) { //Switch to pick level2 language
+        case "numbers":
         $grid_arr = [1,2,3,4,5,6,7,8,9];
         break;
-        case $language === "letters":
+        case "letters":
         $grid_arr = ["A","B","C","D","E","F","G","H","I"];
         break;
-        case $language === "chinese":
+        case "chinese":
         $grid_arr = ["我","你","他","她","饭","吃","茶","是","不"];
         break;
-        case $language === "emoji":
+        case "emoji":
         $grid_arr = ["😜","😂","🎾","😘","😄","😆","🤓","😉","😡"];
         break;
       }
       $count=31;
-      $number_board.width("220px");
-      $input_board.width("220px");
+      $number_board.width("220px"); //set level2 grid styling - number_board
+      $input_board.width("220px"); //set level2 grid styling - number_board
       console.log($tile_num);
       break;
       case "level3":
@@ -151,11 +152,11 @@ $(function() {
       var $rand_num = Math.floor(Math.random()*($grid_arr.length)); //get random number
       var $arr_val = $grid_arr[$rand_num]; //extract array value using random number
 
-      var $new_tile = document.createElement('li');
-      var $new_input = document.createElement('input');
+      var $new_tile = document.createElement('li'); //create <li> for i<$tile_num for number board
+      var $new_input = document.createElement('input');//cre <input> for i<$tile_num for input board
 
-      $number_board.append($new_tile);
-      $input_board.append($new_input);
+      $number_board.append($new_tile); //append $new_tile to $number_board
+      $input_board.append($new_input); //append $new_input to $input_board
 
       $new_tile.id = i;
       $new_input.className += ' newInput';
