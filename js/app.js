@@ -7,7 +7,7 @@ $(function() {
   var $submit_button = $("#submit_button");
   var $load_button = $("#load_button");
   var $reset_button = $("#reset_button");
-  var $timer_button = $("#timer_button").on();
+  var $timer_button = $("#timer_button");
   var $timer = $("#timer");
   var $tiles = $("li");
   var $grid_arr = [];
@@ -15,23 +15,14 @@ $(function() {
   var sol_arr = [];
   var $cor_arr = [];
   var $iq_val = 1;
-  var $count = "";
-  var $counter = setInterval(timer, 1000);
+  var $count;
+  var $counter;
+  console.log($counter);
   var $scenario = 0;
   var $instructions = $("#instructions_text");
 
-
-  function resetTimer(){
-    clearInterval($counter);
-    $number_board.fadeOut(1000);
-    $instructions.html("Very well, please fill in as many of the squares as you can remember... Take all the time you need - but I suggest you move quickly. To submit your answers click Load.");
-  }
-
-  $timer_button.click(function(){
-    resetTimer();
-  });
-
   function timer(){
+    console.log('timer: $count:', $count);
     if($count > 0) {
       $count--;
       if ($count===0) {
@@ -41,14 +32,28 @@ $(function() {
     }
   }
 
+  function startTimer() {
+    $counter = setInterval(timer, 1000);
+  }
+
+  function resetTimer(){
+    console.log("reset timer function automatically");
+    clearInterval($counter);
+    $count = 0;
+    $number_board.fadeOut(1000);
+    $instructions.html("Very well, please fill in as many of the squares as you can remember... Take all the time you need - but I suggest you move quickly. To submit your answers click Load.");
+  }
+
+  $timer_button.click(resetTimer);
+
   $submit_button.click(function() {
     var $level = $(".level").val();
     var $language = $(".language").val();
     var $tile_num = 0;
 
     $instructions.html("Focus... Time is precious. Try to remeber as much of the grid below, before the timer reaches zero. Now is the time to focus! If you wish to start over, then press reset");
-    switch(true) {
-      case $level === "level1":
+    switch($level) {
+      case "level1":
       $scenario = 1;
       $tile_num = 4;
       switch (true) {
@@ -67,12 +72,10 @@ $(function() {
       }
       $count=4;
       $number_board.width("150px");
-      // $number_board.height("150px");
       $input_board.width("150px");
-      // $input_board.height("150px");
       console.log($tile_num);
       break;
-      case $level === "level2":
+      case "level2":
       $scenario = 2;
       $tile_num = 9;
       switch (true) {
@@ -91,12 +94,10 @@ $(function() {
       }
       $count=31;
       $number_board.width("220px");
-      // $number_board.height("220px");
       $input_board.width("220px");
-      // $input_board.height("220px");
       console.log($tile_num);
       break;
-      case $level === "level3":
+      case "level3":
       $tile_num = 16;
       $scenario = 3;
       $count=61;
@@ -115,12 +116,10 @@ $(function() {
         break;
       }
       $number_board.width("250px");
-      // $number_board.height("250px");
       $input_board.width("250px");
-      // $input_board.height("250px");
       console.log($tile_num);
       break;
-      case $level === "level4":
+      case "level4":
       $scenario = 4;
       $tile_num = 25;
       $count=121;
@@ -139,9 +138,7 @@ $(function() {
         break;
       }
       $number_board.width("330px");
-      // $number_board.height("330px");
       $input_board.width("330px");
-      // $input_board.height("330px");
       console.log($tile_num);
       break;
     }
@@ -163,13 +160,12 @@ $(function() {
       $new_tile.innerHTML = $arr_val;
       $new_input.type = "text";
 
-      $rand_arr.push($new_tile.innerHTML); //omitted parse float
+      $rand_arr.push($new_tile.innerHTML);
       var $rem_num = ($grid_arr.indexOf($arr_val)); //assign array value to a variable
       $grid_arr.splice($rem_num, 1); //take away array vaue from array
       //e.preventDefault();
     }
-    if ($count===0) {
-    }
+    startTimer();
     $submit_button.prop( "disabled", true );
   });
 
@@ -262,12 +258,20 @@ $(function() {
 
 
   $reset_button.click(function() {
+    //CLEARING GRIDS
     $grid_arr = [];
     $rand_arr = [];
     sol_arr = [];
     $cor_arr = [];
+
+    //CLEARING TIMER FUNCTIONALITY
+    clearInterval($counter);
     $count= 0;
-    $timer.html("Use your time wisely...");
+    console.log("removed interval!");
+    console.log("count: "+$count);
+    $timer.html("Timer: "+$count + " seconds");
+
+
     var $level = $(".level").val();
     var $language = $(".language").val();
     $submit_button.prop( "disabled", false );
@@ -279,6 +283,6 @@ $(function() {
     $input_board.css("z-index", "1");
     $("input").html(" ");
     $("li").html(" ");
-    $instructions.html("Hello! I am Dr. Kawashima. I am a renowed expert on memory. I am looking for subjects for my research. If you would like to help, pick a level and language and press submit!");
+    //$instructions.html("Hello! I am Dr. Kawashima. I am a renowed expert on memory. I am looking for subjects for my research. If you would like to help, pick a level and language and press submit!");
   });
 });
