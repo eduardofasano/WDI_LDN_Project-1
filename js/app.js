@@ -1,8 +1,8 @@
 $(function() {
   console.log('loaded');
 
-  var numberBoard = $(".number_board"); //number board a.k.a grid
-  var $input_board = $(".input_board"); //input board which appears at end of timer and replaces game board grid
+  var $numberBoard = $(".number_board"); //number board a.k.a grid
+  var $inputBoard = $(".input_board"); //input board which appears at end of timer and replaces game board grid
   //var $form_event = $(".form_event");  REMOVE??
   var $submit_button = $("#submit_button"); //submit button which drives the grid functionality
   var $load_button = $("#load_button"); //allows user to upload answers to missing grid elements
@@ -43,7 +43,7 @@ $(function() {
     console.log("reset timer function automatically");
     clearInterval(counter);
     count = 0;
-    numberBoard.fadeOut(1000);
+    $numberBoard.fadeOut(1000);
     $instructions.html("Very well, please fill in as many of the squares as you can remember... Take all the time you need - but I suggest you move quickly. To submit your answers click Load.");
   }
 
@@ -77,8 +77,8 @@ $(function() {
         break;
       }
       count=4; //Set level1 timer count
-      numberBoard.width("150px"); //Set level1 grid styling - number board
-      $input_board.width("150px"); //Set level1 grid styling - input board
+      $numberBoard.width("150px"); //Set level1 grid styling - number board
+      $inputBoard.width("150px"); //Set level1 grid styling - input board
       break;
       case "level2":
       scenario = 2;
@@ -98,8 +98,8 @@ $(function() {
         break;
       }
       count=31;
-      numberBoard.width("220px"); //set level2 grid styling - number_board
-      $input_board.width("220px"); //set level2 grid styling - number_board
+      $numberBoard.width("220px"); //set level2 grid styling - number_board
+      $inputBoard.width("220px"); //set level2 grid styling - number_board
       console.log($tile_num);
       break;
       case "level3":
@@ -120,8 +120,8 @@ $(function() {
         gridArr = ["😜","😂","🎾","😘","😄","😆","🤓","😉","😡","💩","💀","👻","👽","🤖","🙉","🐨"];
         break;
       }
-      numberBoard.width("250px");
-      $input_board.width("250px");
+      $numberBoard.width("250px");
+      $inputBoard.width("250px");
       console.log($tile_num);
       break;
       case "level4":
@@ -142,8 +142,8 @@ $(function() {
         gridArr = ["😜","😂","🎾","😘","😄","😆","🤓","😉","😡","💩","💀","👻","👽","🤖","🙉","🐨","🐲","🕊","🍜","🎷","🗿","🕶","🌊","🎱","🏄"];
         break;
       }
-      numberBoard.width("330px");
-      $input_board.width("330px");
+      $numberBoard.width("330px");
+      $inputBoard.width("330px");
       console.log($tile_num);
       break;
     }
@@ -156,8 +156,8 @@ $(function() {
       var $new_tile = document.createElement('li'); //create <li> for i<$tile_num for number board
       var $new_input = document.createElement('input');//cre <input> for i<$tile_num for input board
 
-      numberBoard.append($new_tile); //append $new_tile to numberBoard
-      $input_board.append($new_input); //append $new_input to $input_board
+      $numberBoard.append($new_tile); //append $new_tile to $numberBoard
+      $inputBoard.append($new_input); //append $new_input to $inputBoard
 
       $new_tile.id = i;
       $new_input.className += ' newInput';
@@ -290,13 +290,13 @@ $(function() {
   $reset_button.click(function() {
     //Clear grids, prompt and arrays
     $instructions.html("Hello! I am Dr. Kawashima. I am a renowed expert on memory. I am looking for subjects for my research. If you would like to help, pick a level and language, then press submit!");
-    numberBoard.css("z-index", "2"); // when reset, place number board back in front
-    $input_board.css("z-index", "1"); // when reset, place input board in the back again
-    numberBoard.html(""); // clear number board content
-    $input_board.html(""); // clear input board content
+    $numberBoard.css("z-index", "2"); // when reset, place number board back in front
+    $inputBoard.css("z-index", "1"); // when reset, place input board in the back again
+    $numberBoard.html(""); // clear number board content
+    $inputBoard.html(""); // clear input board content
     $("input").html(" "); // clear input inner html
     $("li").html(" "); // clear li inner html
-    numberBoard.fadeIn(2000);
+    $numberBoard.fadeIn(2000);
     gridArr = [];
     randArr = [];
     sol_arr = [];
