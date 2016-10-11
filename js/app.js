@@ -4,16 +4,16 @@ $(function() {
   var $numberBoard = $(".number_board"); //number board a.k.a grid
   var $inputBoard = $(".input_board"); //input board which appears at end of timer and replaces game board grid
   //var $form_event = $(".form_event");  REMOVE??
-  var $submit_button = $("#submit_button"); //submit button which drives the grid functionality
-  var $load_button = $("#load_button"); //allows user to upload answers to missing grid elements
-  var $reset_button = $("#reset_button"); //allows users to reset game board and levels to start over
-  var $timer_button = $("#timer_button"); //allows users to manually end the timer and input grid elements
+  var $submitButton = $("#submit_button"); //submit button which drives the grid functionality
+  var $loadButton = $("#load_button"); //allows user to upload answers to missing grid elements
+  var $resetButton = $("#reset_button"); //allows users to reset game board and levels to start over
+  var $timerButton = $("#timer_button"); //allows users to manually end the timer and input grid elements
   var $timer = $("#timer"); //timer HTML selector
   var $tiles = $("li"); //number board is made up of individual <li> elements
   var gridArr = []; //primary array used to populate number board based on language & level when submit clicked
   var randArr = []; //stores randomised depicted components of grid array into seperate array
-  var sol_arr = []; // stores user inputs into grid
-  var corArr = []; // stores '1' each time user matches grid_arr[i] to sol_arr[i]
+  var solArr = []; // stores user inputs into grid
+  var corArr = []; // stores '1' each time user matches grid_arr[i] to solArr[i]
   var iqVal = 1; // (cor_arr.length)/(rand_arr.length); % correct
   var count; // variable for time user has to complete each level
   var counter; // variable which stores setInterval functionalilty for timer
@@ -48,10 +48,10 @@ $(function() {
   }
 
   //Manual function which allows user to call resetTimer function
-  $timer_button.click(resetTimer);
+  $timerButton.click(resetTimer);
 
   //Submit button click event which defines level & language switches as well as the number board size
-  $submit_button.click(function() {
+  $submitButton.click(function() {
     var $level = $(".level").val();
     var $language = $(".language").val();
     var $tile_num = 0;
@@ -172,15 +172,15 @@ $(function() {
       //e.preventDefault();
     }
     startTimer();
-    $submit_button.prop( "disabled", true );
+    $submitButton.prop( "disabled", true );
   });
 
   //Load button gets user inputted numbers and figures, runs score function as well as final prompt function
-  $load_button.click(function() {
-    var newInput_obj = document.getElementsByClassName("newInput");
-    for (i=0; i<newInput_obj.length; i++) {
-      console.log(i, newInput_obj[i].value);
-      sol_arr.push(newInput_obj[i].value); //omitted parse float
+  $loadButton.click(function() {
+    var newInputObj = document.getElementsByClassName("newInput");
+    for (i=0; i<newInputObj.length; i++) {
+      console.log(i, newInputObj[i].value);
+      solArr.push(newInputObj[i].value); //omitted parse float
     }
     scoreCheck();
     finalPrompt();
@@ -188,16 +188,16 @@ $(function() {
 
   //scoreCheck function compares the arrays and adds '1' to the 'cor_arr' if the answers are a match
   function scoreCheck (){
-    var newInput_obj = document.getElementsByClassName("newInput");
-    for (i=0; i<newInput_obj.length; i++) {
-      if(sol_arr[i] === randArr[i]) {
-        newInput_obj[i].className += ' correct';
+    var newInputObj = document.getElementsByClassName("newInput");
+    for (i=0; i<newInputObj.length; i++) {
+      if(solArr[i] === randArr[i]) {
+        newInputObj[i].className += ' correct';
         corArr.push(1);
       } else {
-        newInput_obj[i].className += ' incorrect';
+        newInputObj[i].className += ' incorrect';
       }
     }
-    iqVal = ((corArr.length/newInput_obj.length));
+    iqVal = ((corArr.length/newInputObj.length));
     }
 
     //Function to set Kawashima prompt depending on level selected and IQvalue i.e. the score
@@ -225,69 +225,7 @@ $(function() {
       $instructions.html(message);
     }
 
-    // function finalPrompt (){
-    // switch (true) {
-    //   case scenario === 1:
-    //     switch(true) {
-    //     case iqVal === (1.0):
-    //       $instructions.html("Very impressive, a perfect score, you are obviously ready for the next level!");
-    //       break;
-    //       case iqVal >= (0.75):
-    //       $instructions.html("Well done indeed. Even though you missed a tile, I suggest you press reset and move onto the next level!");
-    //       break;
-    //       case iqVal >= (0.6):
-    //       $instructions.html("There is little to be proud of in your score. Are you trying to ruin my experiment!?!? Focus harder! Repeat the same level! Press Reset...");
-    //       break;
-    //   } break;
-    //   case scenario === 2:
-    //   switch(true) {
-    //   case iqVal === (1.0):
-    //     $instructions.html("Very impressive, a perfect score, you are obviously ready for the next level!");
-    //     break;
-    //     case iqVal >= (0.75):
-    //     $instructions.html("Well done indeed. You scored "+(iqVal*100)+"%, I suggest you press reset and move onto the next level!");
-    //     break;
-    //     case iqVal >= (0.60):
-    //     $instructions.html("You scored "+(iqVal*100)+"%, perhaps you should repeat this level before moving forward... Focus!");
-    //     break;
-    //     case iqVal < (0.60):
-    //     $instructions.html("You scored "+(iqVal*100)+"%!  Are you trying to ruin my experiment!?!? Focus harder! Repeat the same level!");
-    //     break;
-    //   } break;
-    //   case scenario === 3:
-    //   switch(true) {
-    //   case iqVal === (1.0):
-    //     $instructions.html("Very impressive, a perfect score, you are obviously ready for the next level!");
-    //     break;
-    //     case iqVal >= (0.75):
-    //     $instructions.html("Well done indeed. You scored "+(iqVal*100)+"%, I suggest you press reset and move onto the next level!");
-    //     break;
-    //     case iqVal >= (0.60):
-    //     $instructions.html("You scored "+(iqVal*100)+"%, perhaps you should repeat this level before moving forward... Focus!");
-    //     break;
-    //     case iqVal < (0.60):
-    //     $instructions.html("You scored "+(iqVal*100)+"%!  Are you trying to ruin my experiment!?!? Focus harder! Repeat the same level!");
-    //     break;
-    //   } break;
-    //   case scenario === 4:
-    //   switch(true) {
-    //   case iqVal === (1.0):
-    //     $instructions.html("Mamma mia... A perfect score!!! I never thought this day would come! You have solved the mysteries to memory. What a wonderful mind you have! I am forever greateful...");
-    //     break;
-    //     case iqVal >= (0.75):
-    //     $instructions.html("Well done indeed. You scored "+(iqVal*100)+"%, dare I say that you are on your way to reaching a state of perfect memory?");
-    //     break;
-    //     case iqVal >= (0.60):
-    //     $instructions.html("You scored "+((iqVal*100).toFixed(2))+"%, this is a hard challenge indeed. It would be best if you treat it as such... Focus!");
-    //     break;
-    //     case iqVal < (0.60):
-    //     $instructions.html("You scored "+(iqVal*100)+"%!  Are you trying to ruin my experiment!?!? Focus harder! Repeat the same level!");
-    //     break;
-    //   }
-    // }
-    // }
-
-  $reset_button.click(function() {
+  $resetButton.click(function() {
     //Clear grids, prompt and arrays
     $instructions.html("Hello! I am Dr. Kawashima. I am a renowed expert on memory. I am looking for subjects for my research. If you would like to help, pick a level and language, then press submit!");
     $numberBoard.css("z-index", "2"); // when reset, place number board back in front
@@ -299,7 +237,7 @@ $(function() {
     $numberBoard.fadeIn(2000);
     gridArr = [];
     randArr = [];
-    sol_arr = [];
+    solArr = [];
     corArr = [];
 
     //Clear level and language select values
@@ -307,7 +245,7 @@ $(function() {
     var $language = $(".language").val();
 
     //Re-enable disabled submit button
-    $submit_button.prop( "disabled", false );
+    $submitButton.prop( "disabled", false );
 
     //Clear timer functionality
     clearInterval(counter);
