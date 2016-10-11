@@ -167,6 +167,7 @@ $(function() {
       $inputBoard.append(newInput); //append newInput to $inputBoard
 
       newTile.id = i;
+      newTile.className += ' newTile';
       newInput.className += ' newInput';
       newInput.id = i;
 
@@ -194,24 +195,37 @@ $(function() {
     finalPrompt();
   });
 
-
-
   //scoreCheck function compares the arrays and adds '1' to the 'cor_arr' if the answers are a match
   function scoreCheck (){
-    var newInputObj = document.getElementsByClassName("newInput");
-    for (i=0; i<newInputObj.length; i++) {
+    $inputBoard.html("");
+    $numberBoard.fadeIn(1);
+    var newTileObj = document.getElementsByClassName("newTile");
+    for (i=0; i<newTileObj.length; i++) {
       if(solArr[i] === randArr[i]) {
-        newInputObj[i].className += ' correct';
+        newTileObj[i].className += ' correct';
         corArr.push(1);
       } else {
-        newInputObj[i].className += ' incorrect';
+        newTileObj[i].className += ' incorrect';
       }
     }
-    iqVal = ((corArr.length/newInputObj.length));
+    iqVal = ((corArr.length/newTileObj.length));
     }
 
-    //Function to set Kawashima prompt depending on level selected and IQvalue i.e. the score
+    // //scoreCheck function compares the arrays and adds '1' to the 'cor_arr' if the answers are a match
+    // function scoreCheck (){
+    //   var newInputObj = document.getElementsByClassName("newInput");
+    //   for (i=0; i<newInputObj.length; i++) {
+    //     if(solArr[i] === randArr[i]) {
+    //       newInputObj[i].className += ' correct';
+    //       corArr.push(1);
+    //     } else {
+    //       newInputObj[i].className += ' incorrect';
+    //     }
+    //   }
+    //   iqVal = ((corArr.length/newInputObj.length));
+    //   }
 
+    //Function to set Kawashima prompt depending on level selected and IQvalue i.e. the score
     function finalPrompt() {
       var message = "";
       switch(true) {
@@ -253,8 +267,10 @@ $(function() {
     var $level = $(".level").val();
     var $language = $(".language").val();
 
-    //Re-enable disabled submit button
+    //Re-enable or disable buttons
     $submitButton.prop( "disabled", false );
+    $loadButton.prop( "disabled", true );
+    $timerButton.prop( "disabled", true );
 
     //Clear timer functionality
     clearInterval(counter);
