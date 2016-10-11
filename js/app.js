@@ -44,14 +44,17 @@ $(function() {
     $instructions.html("Very well, please fill in as many of the squares as you can remember... Take all the time you need - but I suggest you move quickly. To submit your answers click Load.");
   }
 
-  $timer_button.click(resetTimer);
+  $timer_button.click(
+    resetTimer
+  );
 
   $submit_button.click(function() {
     var $level = $(".level").val();
     var $language = $(".language").val();
     var $tile_num = 0;
-
     $instructions.html("Focus... Time is precious. Try to remeber as much of the grid below, before the timer reaches zero. Now is the time to focus! If you wish to start over, then press reset");
+
+    //Switch statement which sets tile_numbers to be created and what language to be used depending on what language and level the user selects
     switch($level) {
       case "level1":
       $scenario = 1;
@@ -143,6 +146,7 @@ $(function() {
       break;
     }
 
+    //For loop which creates and appends tiles for board depending on tile_num figure set by user above
     for (i=0; i<$tile_num; i++) {
       var $rand_num = Math.floor(Math.random()*($grid_arr.length)); //get random number
       var $arr_val = $grid_arr[$rand_num]; //extract array value using random number
@@ -169,6 +173,7 @@ $(function() {
     $submit_button.prop( "disabled", true );
   });
 
+  //Load button gets user inputted numbers and figures, runs score function as well as final prompt function
   $load_button.click(function() {
     var newInput_obj = document.getElementsByClassName("newInput");
     for (i=0; i<newInput_obj.length; i++) {
@@ -179,6 +184,7 @@ $(function() {
     finalPrompt();
   });
 
+  //scoreCheck function compares the arrays and adds '1' to the 'cor_arr' if the answers are a match
   function scoreCheck (){
     var newInput_obj = document.getElementsByClassName("newInput");
     for (i=0; i<newInput_obj.length; i++) {
@@ -194,6 +200,7 @@ $(function() {
     console.log($scenario);
     }
 
+    //Function to set Kawashima prompt depending on level selected and IQvalue i.e. the score
     function finalPrompt (){
     switch (true) {
       case $scenario === 1:
@@ -205,7 +212,7 @@ $(function() {
           $instructions.html("Well done indeed. Even though you missed a tile, I suggest you press reset and move onto the next level!");
           break;
           case $iq_val < (0.75):
-          $instructions.html("There is little to be proud of in your score. Are you trying to ruin my experiment!?!? Focus harder! Repeat the same level!");
+          $instructions.html("There is little to be proud of in your score. Are you trying to ruin my experiment!?!? Focus harder! Repeat the same level! Press Reset...");
           break;
       } break;
       case $scenario === 2:
@@ -256,33 +263,32 @@ $(function() {
     }
     }
 
-
   $reset_button.click(function() {
-    //CLEARING GRIDS
+    //Clear grids, prompt and arrays
+    $instructions.html("Hello! I am Dr. Kawashima. I am a renowed expert on memory. I am looking for subjects for my research. If you would like to help, pick a level and language, then press submit!");
+    $number_board.css("z-index", "2"); // when reset, place number board back in front
+    $input_board.css("z-index", "1"); // when reset, place input board in the back again
+    $number_board.html(""); // clear number board content
+    $input_board.html(""); // clear input board content
+    $("input").html(" "); // clear input inner html
+    $("li").html(" "); // clear li inner html
+    $number_board.fadeIn(2000);
     $grid_arr = [];
     $rand_arr = [];
     sol_arr = [];
     $cor_arr = [];
 
-    //CLEARING TIMER FUNCTIONALITY
-    clearInterval($counter);
-    $count= 0;
-    console.log("removed interval!");
-    console.log("count: "+$count);
-    $timer.html("Timer: "+$count + " seconds");
-
-
+    //Clear level and language select values
     var $level = $(".level").val();
     var $language = $(".language").val();
+
+    //Re-enable disabled submit button
     $submit_button.prop( "disabled", false );
-    $number_board.fadeIn(2000);
-    $number_board.html("");
-    $input_board.html("");
-    //$input_board.html(" ");
-    $number_board.css("z-index", "2");
-    $input_board.css("z-index", "1");
-    $("input").html(" ");
-    $("li").html(" ");
-    //$instructions.html("Hello! I am Dr. Kawashima. I am a renowed expert on memory. I am looking for subjects for my research. If you would like to help, pick a level and language and press submit!");
+
+    //Clear timer functionality
+    clearInterval($counter);
+    $count= 0;
+    $timer.html("Timer: "+$count + " seconds");
+
   });
 });
