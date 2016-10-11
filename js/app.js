@@ -27,6 +27,7 @@ $(function() {
 
   $loadButton.prop( "disabled", true );
   $timerButton.prop( "disabled", true );
+  $resetButton.prop( "disabled", true );
 
   //TIMER FUNCTIONALITY
   //Timer function
@@ -51,6 +52,7 @@ $(function() {
     clearInterval(counter);
     count = 0;
     $numberBoard.fadeOut(1000);
+    $inputBoard.fadeIn(1000);
     $instructions.html("Very well, please fill in as many of the squares as you can remember... Take all the time you need - but I suggest you move quickly. To submit your answers click Load.");
   }
 
@@ -182,6 +184,8 @@ $(function() {
     $submitButton.prop( "disabled", true );
     $loadButton.prop( "disabled", false );
     $timerButton.prop( "disabled", false );
+    $resetButton.prop( "disabled", false );
+
 
   });
 
@@ -193,12 +197,13 @@ $(function() {
     }
     scoreCheck();
     finalPrompt();
+    $timerButton.prop( "disabled", true );
   });
 
   //scoreCheck function compares the arrays and adds '1' to the 'cor_arr' if the answers are a match
   function scoreCheck (){
-    $inputBoard.html("");
-    $numberBoard.fadeIn(1);
+    $inputBoard.fadeOut(1000);
+    $numberBoard.fadeIn(1000);
     var newTileObj = document.getElementsByClassName("newTile");
     for (i=0; i<newTileObj.length; i++) {
       if(solArr[i] === randArr[i]) {
@@ -269,6 +274,7 @@ $(function() {
 
     //Re-enable or disable buttons
     $submitButton.prop( "disabled", false );
+    // $timerButton.prop( "disabled", false );
     $loadButton.prop( "disabled", true );
     $timerButton.prop( "disabled", true );
 

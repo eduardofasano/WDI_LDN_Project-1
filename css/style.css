@@ -22,7 +22,7 @@ h1 {
 }
 
 #input_buttons {
-  width: 400px;
+  width: 100%;
 }
 
 /*remove deault button styling*/
@@ -35,14 +35,26 @@ h1 {
 
 /*add specific button formatting*/
 #submit_button, #load_button, #reset_button, #timer_button {
-  width: 80px;
-  border-radius: 5px;
-  font-size: 14px;
-  color: white;
-  margin: 15px 5px 0px 5px;
-  background-color: #B8B8B8;
-  border-color: 3px solid #989898;
-  box-shadow: 1px 1px 1px #909090;
+    -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.8);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.8);
+    background-color: #f9f9f9;
+    background-image: -moz-linear-gradient(top, #fefefe, #f2f2f2);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fefefe), to(#f2f2f2));
+    background-image: -webkit-linear-gradient(top, #fefefe, #f2f2f2);
+    background-image: -o-linear-gradient(top, #fefefe, #f2f2f2);
+    background-image: linear-gradient(to bottom, #fefefe, #f2f2f2);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffefefe', endColorstr='#fff2f2f2', GradientType=0);
+    border: 1px solid #d0d0d0;
+    padding: 8px 8px;
+    font-size: 13px;
+    width: 23%;
+    margin-top: 13px;
+    margin-right: 6px;
+}
+
+#timer_button {
+  margin-right: 0px;
 }
 
 #submit_button:hover, #load_button:hover, #reset_button:hover, #timer_button:hover  {
@@ -90,7 +102,7 @@ h1 {
 }
 
 .container {
-  width: 400px;
+  width: 100%;
   height: 400px;
   margin: 0px auto;
   position: relative;
@@ -105,18 +117,18 @@ h1 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  margin: 15px auto;
+  margin: 0 auto;
   text-align: center;
 }
 
-.input_board{ s
+.input_board{
   vertical-align: middle;
   align: center;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  margin: 15px auto;
+  margin: 0 auto;
   text-align: center;
 }
 
@@ -184,3 +196,29 @@ li {
 .language {
   float: right;
 }
+
+/*@media only screen and (max-width: 640px) {
+  main {
+    width: 370px;
+  }
+
+  body {
+    margin: 0px;
+  }
+
+  main #timer {
+    width: 97%;
+    padding: none;
+    margin: none;
+    float: left;
+  }
+
+  main #submit_button, #load_button, #reset_button, #timer_button {
+    width: 75px;
+  }
+
+  main #kawashima {
+    height: 90px;
+    width: 99px;
+  }
+}*/
