@@ -185,8 +185,7 @@ $(function() {
     $loadButton.prop( "disabled", false );
     $timerButton.prop( "disabled", false );
     $resetButton.prop( "disabled", false );
-
-
+    console.log("Randomised Grid Array: "+randArr);
   });
 
   //Load button gets user inputted numbers and figures, runs score function as well as final prompt function
@@ -216,20 +215,6 @@ $(function() {
     iqVal = ((corArr.length/newTileObj.length));
     }
 
-    // //scoreCheck function compares the arrays and adds '1' to the 'cor_arr' if the answers are a match
-    // function scoreCheck (){
-    //   var newInputObj = document.getElementsByClassName("newInput");
-    //   for (i=0; i<newInputObj.length; i++) {
-    //     if(solArr[i] === randArr[i]) {
-    //       newInputObj[i].className += ' correct';
-    //       corArr.push(1);
-    //     } else {
-    //       newInputObj[i].className += ' incorrect';
-    //     }
-    //   }
-    //   iqVal = ((corArr.length/newInputObj.length));
-    //   }
-
     //Function to set Kawashima prompt depending on level selected and IQvalue i.e. the score
     function finalPrompt() {
       var message = "";
@@ -253,7 +238,7 @@ $(function() {
       $instructions.html(message);
     }
 
-  $resetButton.click(function() {
+  $resetButton.click(function() { //reset game function
     //Clear grids, prompt and arrays
     $instructions.html("Hello! I am Dr. Kawashima. I am a renowed expert on memory. I am looking for subjects for my research. If you would like to help, pick a level and language, then press submit!");
     $numberBoard.css("z-index", "2"); // when reset, place number board back in front
