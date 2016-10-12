@@ -61,16 +61,6 @@ h1 {
   background-color: #708090;
 }
 
-/*.selectpicker {
-  style: btn-info;
-  size: 4;
-}*/
-
-/*.select_items {
-  width: 400px;
-  margin: 15px;
-}*/
-
 .clearfix:before,
 .clearfix:after {
     content: " ";
@@ -157,7 +147,7 @@ li {
   vertical-align: middle;
 }
 
-  .newInput {
+.newInput {
   height:60px;
   width: 60px;
   display: inline-block;
@@ -185,7 +175,6 @@ li {
 }
 
 .selectpicker {
-  /*float: left;*/
   width: 48%;
 }
 

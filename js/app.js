@@ -1,9 +1,9 @@
 $(function() {
-  console.log('loaded');
+  console.log('Page Loaded');
 
+  //VARIABLE DECLARATION
   var $numberBoard = $(".number_board"); //number board a.k.a grid
   var $inputBoard = $(".input_board"); //input board which appears at end of timer and replaces game board grid
-  //var $form_event = $(".form_event");  REMOVE??
   var $submitButton = $("#submit_button"); //submit button which drives the grid functionality
   var submitClick = false;
   var $loadButton = $("#load_button"); //allows user to upload answers to missing grid elements
@@ -25,6 +25,7 @@ $(function() {
   var newInput;
   var arrVal;
 
+  //BUTTON DEFAULT STATE
   $loadButton.prop( "disabled", true );
   $timerButton.prop( "disabled", true );
   $resetButton.prop( "disabled", true );
@@ -46,13 +47,13 @@ $(function() {
     counter = setInterval(timer, 1000);
   }
 
-  //Reset timer function called when timer reaches 0 or when user manually end timer
+  //Reset timer function called when timer reaches 0 or when user manually ends timer
   function resetTimer(){
-    console.log("reset timer function automatically");
+    console.log("Reset timer function automatically");
     clearInterval(counter);
     count = 0;
-    $numberBoard.fadeOut(1000);
-    $inputBoard.fadeIn(1000);
+    $numberBoard.fadeOut(1000); //fade number board out to allow input board to emerge
+    $inputBoard.fadeIn(1000); //fade input board in
     $instructions.html("Very well, please fill in as many of the squares as you can remember... Take all the time you need - but I suggest you move quickly. To submit your answers click Load.");
   }
 
@@ -71,7 +72,7 @@ $(function() {
       case "level1":
       scenario = 1;
       $tile_num = 4; //set level one tile count (2x2 grid)
-      switch ($language) { //Switch to pick level2 language
+      switch ($language) { //Switch to pick level1 language
         case "numbers":
         gridArr = [1,2,3,4];
         break;
@@ -109,51 +110,48 @@ $(function() {
       count=31;
       $numberBoard.width("220px"); //set level2 grid styling - number_board
       $inputBoard.width("220px"); //set level2 grid styling - number_board
-      console.log($tile_num);
       break;
       case "level3":
       $tile_num = 16;
       scenario = 3;
       count=61;
-      switch (true) {
-        case $language === "numbers":
+      switch ($language) {
+        case "numbers":
         gridArr = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
         break;
-        case $language === "letters":
+        case "letters":
         gridArr = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P"];
         break;
-        case $language === "chinese":
+        case "chinese":
         gridArr = ["我","你","他","她","饭","吃","茶","是","不","太","好",'马',"雨","快","大","吧",];
         break;
-        case $language === "emoji":
+        case "emoji":
         gridArr = ["😜","😂","🎾","😘","😄","😆","🤓","😉","😡","💩","💀","👻","👽","🤖","🙉","🐨"];
         break;
       }
       $numberBoard.width("250px");
       $inputBoard.width("250px");
-      console.log($tile_num);
       break;
       case "level4":
       scenario = 4;
       $tile_num = 25;
       count=121;
-      switch (true) {
-        case $language === "numbers":
+      switch ($language) {
+        case "numbers":
         gridArr = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25];
         break;
-        case $language === "letters":
+        case "letters":
         gridArr = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y"];
         break;
-        case $language === "chinese":
+        case "chinese":
         gridArr = ["我","你","他","她","饭","吃","茶","是","不","太","好",'马',"雨","快","大","吧","了","写","了","男","女","狗","猫","米","国"];
         break;
-        case $language === "emoji":
+        case "emoji":
         gridArr = ["😜","😂","🎾","😘","😄","😆","🤓","😉","😡","💩","💀","👻","👽","🤖","🙉","🐨","🐲","🕊","🍜","🎷","🗿","🕶","🌊","🎱","🏄"];
         break;
       }
       $numberBoard.width("330px");
       $inputBoard.width("330px");
-      console.log($tile_num);
       break;
     }
 
