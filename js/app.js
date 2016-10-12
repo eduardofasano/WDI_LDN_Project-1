@@ -70,7 +70,7 @@ $(function() {
     //Switch statement within switch statement to determine tile num, count, language and level
     switch($level) {
       case "level1":
-      scenario = 1;
+      scenario = 1; //variable used for finalPrompt() function
       $tile_num = 4; //set level one tile count (2x2 grid)
       switch ($language) { //Switch to pick level1 language
         case "numbers":
@@ -157,8 +157,8 @@ $(function() {
 
     //For loop which creates and appends tiles for board depending on tile_num figure set by user above
     for (i=0; i<$tile_num; i++) {
-      var randNum = Math.floor(Math.random()*(gridArr.length)); //get random number
-      arrVal = gridArr[randNum]; //extract array value using random number
+      var randNum = Math.floor(Math.random()*(gridArr.length)); //get random number within array length
+      arrVal = gridArr[randNum]; //extract array value using randomised number randNum
 
       newTile = document.createElement('li'); //create <li> for i<$tile_num for number board
       newInput = document.createElement('input');//cre <input> for i<$tile_num for input board
@@ -166,17 +166,17 @@ $(function() {
       $numberBoard.append(newTile); //append newTile to $numberBoard
       $inputBoard.append(newInput); //append newInput to $inputBoard
 
-      newTile.id = i;
-      newTile.className += ' newTile';
-      newInput.className += ' newInput';
-      newInput.id = i;
+      newTile.id = i; //assign IDs
+      newTile.className += ' newTile';//assign class name
+      newInput.className += ' newInput';//assign class name
+      newInput.id = i; //assign IDs
 
       newTile.innerHTML = arrVal;
       newInput.type = "text";
 
-      randArr.push(newTile.innerHTML);
-      var $rem_num = (gridArr.indexOf(arrVal)); //assign array value to a variable
-      gridArr.splice($rem_num, 1); //take away array vaue from array
+      randArr.push(newTile.innerHTML); //store each tile into array randArr
+      var remNum = (gridArr.indexOf(arrVal)); //assign array value within gridArr to 'removeNumber' variable
+      gridArr.splice(remNum, 1); //splice remNum from gridArr to prevent same value to be shown twice on grid
     }
     startTimer();
     $submitButton.prop( "disabled", true );
@@ -190,7 +190,7 @@ $(function() {
   $loadButton.click( function() {
     var newInputObj = document.getElementsByClassName("newInput");
     for (i=0; i<newInputObj.length; i++) {
-      solArr.push(newInputObj[i].value);
+      solArr.push(newInputObj[i].value); //get user input from newInput class and store into a 'solutionArray'
     }
     scoreCheck();
     finalPrompt();
@@ -199,13 +199,13 @@ $(function() {
 
   //scoreCheck function compares the arrays and adds '1' to the 'cor_arr' if the answers are a match
   function scoreCheck (){
-    $inputBoard.fadeOut(1000);
-    $numberBoard.fadeIn(1000);
+    $inputBoard.fadeOut(1000); //fade out to hide input board
+    $numberBoard.fadeIn(1000); //fade in number board with underlying randomised grid values
     var newTileObj = document.getElementsByClassName("newTile");
     for (i=0; i<newTileObj.length; i++) {
       if(solArr[i] === randArr[i]) {
-        newTileObj[i].className += ' correct';
-        corArr.push(1);
+        newTileObj[i].className += ' correct'; //color background green
+        corArr.push(1); //push value 1 into correctArray to be able to get score of how many right answers user
       } else {
         newTileObj[i].className += ' incorrect';
       }
